@@ -1,0 +1,54 @@
+.course {
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+}
+
+.managment {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.course-content {
+    max-width: 90%;
+    width: 100%;
+}
+
+.course-title {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.course-date {
+    position: absolute;
+    right: 0;
+}
+
+.course-name {
+    margin: 0 !important;
+}
+
+.edit-button {
+    width: 50px !important;
+    height: 50px !important;
+    margin-top: 10px !important;
+}
+
+.delete-button {
+    width: 50px !important;
+    height: 50px !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.course-description{
+    font-size: 14px !important;
+}
+
+.course-duration {
+    margin-left: 10px !important;
+}
