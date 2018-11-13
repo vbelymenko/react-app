@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
-import LoginPage from '../page/LoginPage';
-import CoursesPage from '../page/CoursesPage';
-import EditCoursePage from '../page/EditCoursePage';
+import { Route } from 'react-router-dom';
+import { LoginPage, CoursesPage, EditCoursePage } from '../page';
 
 
 
@@ -10,9 +8,9 @@ class AppRouter extends Component {
   render() {
     return (
       <div>
-        <Route path="/edit" component={EditCoursePage}/>
-        <Route path="/course" component={CoursesPage}/>
-        <Route path="/login" component={LoginPage}/>
+        <Route path="/edit" component={EditCoursePage} />
+        <Route path="/course" component={CoursesPage} />
+        <Route path="/login" component={LoginPage} />
       </div>
     );
   }

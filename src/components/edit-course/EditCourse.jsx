@@ -8,7 +8,7 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import "./EditCourse.css";
 
-export default class EditCourse extends Component {
+export class EditCourse extends Component {
     render() {
         return (
             <div className="edit-container">

@@ -1,25 +1,13 @@
-import React from 'react'
+import React from 'react';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Search from '@material-ui/icons/Search';
 import Add from '@material-ui/icons/Add';
 import './Navigation.css';
 
-
-const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-    input: {
-      display: 'none',
-    },
-  });
-
-class Navigation extends React.Component {
+export class Navigation extends React.Component {
 
     render() {
-        const { classes } = this.props;
         return (
             <form className="container">
                 <TextField
@@ -28,17 +16,15 @@ class Navigation extends React.Component {
 
                     margin="normal"
                     variant="outlined" />
-                <Button size="small" className={classes.button}>
-                    
-                    <Search className={classes.rightIcon} />
+                <Button size="small" >
+
+                    <Search/>
                 </Button>
-                <Button size="small" className={classes.button}>
-                    
-                    <Add className={classes.rightIcon}/>
+                <Button size="small" >
+
+                    <Add/>
                 </Button>
             </form>
         )
     }
 }
-
-export default withStyles(styles)(Navigation);
