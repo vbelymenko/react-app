@@ -8,7 +8,6 @@ const courses = [
 
 export const getById = id => {
     const index = parseInt(id, 10);
-    debugger
     return courses.filter((i) =>
         index === i.id
     )[0]
