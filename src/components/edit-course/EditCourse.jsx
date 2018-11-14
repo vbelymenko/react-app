@@ -6,41 +6,60 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
+import { getById } from "../../db/db";
 import "./EditCourse.css";
 
 export class EditCourse extends Component {
+
+constructor(props) {
+        super(props);
+
+        this.state = {
+            course: {}
+        };
+    }
+
+    componentDidMount() {
+        const course = getById(this.props.match.params.id);
+        this.setState({
+            course
+        })
+    }
     render() {
         return (
             <div className="edit-container">
 
-                <TextField
+                <input
                     id="standard-uncontrolled"
                     label="Name"
                     className="input"
                     margin="normal"
+                    defaultValue={this.state.course.name}
                 />
-                <TextField
+                <input
                     id="standard-multiline-static"
                     multiline
                     rows="4"
                     label="Description"
                     className="input"
                     margin="normal"
+                    defaultValue={this.state.course.description}
                 />
-                <TextField
+                <input
                     id="date"
                     label="Date"
                     type="date"
-                    defaultValue="2017-05-24"
                     className="input"
+                    defaultValue={this.state.course.date}
 
                 />
-                <TextField
+                <input
                     id="filled-number"
                     label="Duration"
                     type="number"
                     className="input"
                     margin="normal"
+                    defaultValue={this.state.course.duration}
                 />
                 <div className="authors">
                     <List component="nav">

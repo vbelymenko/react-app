@@ -10,6 +10,11 @@ import './CourseItem.css';
 
 export class CourseItem extends React.Component {
 
+     onClick = () => {
+            const { handleClick, course } = this.props;
+            handleClick(course.id);
+        }
+
     render() {
         const { course } = this.props;
         return (
@@ -34,7 +39,7 @@ export class CourseItem extends React.Component {
                             </Typography>
                         </CardContent>
                         <div className='managment'>
-                            <Button variant="fab" className="edit-button" color="secondary" aria-label="Edit">
+                            <Button variant="fab" className="edit-button" onClick={this.onClick} color="secondary" aria-label="Edit">
                                 <EditIcon />
                             </Button>
                             <Button variant="fab" className="delete-button" aria-label="Delete">
