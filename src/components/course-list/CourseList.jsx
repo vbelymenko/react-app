@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { CourseItem } from '../course-item';
 import { getAll } from "../../db/db";
+import { withRouter } from "react-router-dom";
 
 
-export class CourseList extends Component {
+class CourseListBlock extends Component {
 
     constructor(props) {
         super(props);
@@ -20,12 +21,12 @@ export class CourseList extends Component {
         })
     }
 
-    handleEditCourseClick = id => {
-        this.props.history.push(`/edit/${id}`);
+    handleEditCourseClick = (id) => {
+        this.props.history.push(`courses/${id}`);
     }
 
     renderCourses = () => {
-        return this.state.courses.map(courseItem => <CourseItem key={courseItem.id} course={courseItem} handleEditCourseClick={this.handleEditCourseClick}/>);
+        return this.state.courses.map(courseItem => <CourseItem key={courseItem.id} course={courseItem} handleEditCourseClick={this.handleEditCourseClick} />);
     }
     render() {
         return (
@@ -33,3 +34,4 @@ export class CourseList extends Component {
         );
     }
 }
+export const CourseList = withRouter(CourseListBlock);

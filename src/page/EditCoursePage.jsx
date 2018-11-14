@@ -6,7 +6,7 @@ export class EditCoursePage extends Component {
     render() {
         return (
             <AppContainer>
-                <EditCourse />
+                <EditCourse {...this.props}/>
             </AppContainer>
         );
     }

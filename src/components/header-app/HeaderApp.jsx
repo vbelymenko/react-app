@@ -11,7 +11,7 @@ export class HeaderApp extends Component {
             <div className='header-root'>
                 <AppBar position="static" className="navbar">
                     <Toolbar>
-                        <Typography variant="h6" color="inherit" className='grow'>
+                        <Typography variant="display2" color="inherit" className='grow'>
                             Courses
           </Typography>
                         <Button className='login-button' color="inherit">Login</Button>

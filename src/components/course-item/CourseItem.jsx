@@ -30,7 +30,7 @@ export class CourseItem extends Component {
                                     {course.duration}
                                 </Typography>
                                 <Typography className="course-date" gutterBottom variant="display1" component="h4">
-                                    {course.data}
+                                    {course.date}
                                 </Typography>
                             </div>
 
@@ -39,9 +39,11 @@ export class CourseItem extends Component {
                             </Typography>
                         </CardContent>
                         <div className='managment'>
-                            <Button variant="fab" className="edit-button" onClick={this.editCourse} color="secondary" aria-label="Edit">
-                                <EditIcon />
-                            </Button>
+                            {/* <Link to={`edit/${course.id}`}> */}
+                                <Button variant="fab" className="edit-button" onClick={this.editCourse} color="secondary" aria-label="Edit">
+                                    <EditIcon />
+                                </Button>
+                            {/* </Link> */}
                             <Button variant="fab" className="delete-button" aria-label="Delete">
                                 <DeleteIcon />
                             </Button>

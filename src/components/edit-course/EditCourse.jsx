@@ -1,102 +1,88 @@
 import React, { Component } from "react";
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
-import ArrowBack from '@material-ui/icons/ArrowBack';
-import ArrowForward from '@material-ui/icons/ArrowForward';
-import { getById } from "../../db/db";
+import { getCourseById, getPossibleAuthors, getCourseAuthors } from "../../db/db";
 import "./EditCourse.css";
 
 export class EditCourse extends Component {
 
-constructor(props) {
+    constructor(props) {
         super(props);
 
         this.state = {
-            course: {}
+            course: {},
+            possibleAuthors: [],
+            courseAuthors: []
         };
     }
 
     componentDidMount() {
-        const course = getById(this.props.match.params.id);
+        const course = getCourseById(this.props.match.params.id);
+        const possibleAuthors = getPossibleAuthors(course.authorIds);
+        const courseAuthors = getCourseAuthors(course.authorIds);
         this.setState({
-            course
+            course,
+            possibleAuthors,
+            courseAuthors
         })
     }
     render() {
         return (
-            <div className="edit-container">
+            <div className="edit-course">
 
                 <input
-                    id="standard-uncontrolled"
                     label="Name"
                     className="input"
-                    margin="normal"
                     defaultValue={this.state.course.name}
                 />
-                <input
-                    id="standard-multiline-static"
-                    multiline
+                <textarea
                     rows="4"
                     label="Description"
                     className="input"
-                    margin="normal"
-                    defaultValue={this.state.course.description}
+                    value={this.state.course.description}
                 />
                 <input
-                    id="date"
                     label="Date"
                     type="date"
                     className="input"
-                    defaultValue={this.state.course.date}
+                    value={this.state.course.date}
 
                 />
                 <input
-                    id="filled-number"
                     label="Duration"
                     type="number"
+                    min="0"
                     className="input"
-                    margin="normal"
                     defaultValue={this.state.course.duration}
                 />
                 <div className="authors">
-                    <List component="nav">
-                        <ListItem className="list-item" button>
-                            <ListItemText className="list-item-text" inset primary="Eric Hoffman1" />
-                        </ListItem>
-                        <ListItem className="list-item" button>
-                            <ListItemText className="list-item-text" inset primary="Eric Hoffman2" />
-                        </ListItem>
-                        <ListItem className="list-item" button>
-                            <ListItemText className="list-item-text" inset primary="Eric Hoffman3" />
-                        </ListItem>
-                    </List>
+                    <ul className="potential-authors-list">
+                        {
+                            this.state.possibleAuthors.map((author) =>
+                                <button key={author.id} type="button" className="list-group-item list-group-item-action">{author.name}</button>
+                            )
+                        }
+                    </ul>
                     <div className="managment-course">
-                        <Button variant="fab" className="edit-button" color="secondary" aria-label="Edit">
-                            <ArrowForward />
-                        </Button>
-                        <Button variant="fab" className="delete-button" aria-label="Delete">
-                            <ArrowBack />
-                        </Button>
+                        <button variant="fab" className="add-author-button btn btn-info" color="secondary">
+                            <i className="glyphicon glyphicon-chevron-right"></i>
+                        </button>
+                        <button variant="fab" className="remove-author-button btn btn-default" >
+                            <i className="glyphicon glyphicon-chevron-left"></i>
+                        </button>
                     </div>
-                    <List component="nav">
-                        <ListItem className="list-item" button>
-                            <ListItemText className="list-item-text" inset primary="Eric Hoffman4" />
-                        </ListItem>
-                        <ListItem className="list-item" button>
-                            <ListItemText className="list-item-text" inset primary="Eric Hoffman5" />
-                        </ListItem>
-                    </List>
+                    <ul className="course-authors-list">
+                        {
+                            this.state.courseAuthors.map((author) =>
+                                <button key={author.id} type="button" className="list-group-item list-group-item-action">{author.name}</button>)
+                        }
+                    </ul>
                 </div>
-                <div className="save-cancle-buttons">
-                    <Button variant="contained" color="secondary" className="save-button">
+                <div className="edit-course-buttons">
+                    <button color="secondary" className="save-button btn btn-default btn-lg">
                         Save
-                    </Button>
-                    <Button variant="contained" className="cancle-button">
+                    </button>
+                    <button className="cancle-button btn btn-default btn-lg">
                         Cancle
-                    </Button>
+                    </button>
                 </div>
             </div>
         );
