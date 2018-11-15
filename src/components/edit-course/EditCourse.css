@@ -1,0 +1,5 @@
+
+.potential-authors-list, .course-authors-list {
+    overflow: auto;
+    max-height: 200px;
+}

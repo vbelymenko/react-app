@@ -1,0 +1,10 @@
+.Login {
+  display: flex;
+  height: 100vh;
+  margin: auto;
+}
+
+.Login form {
+  margin: auto;
+  max-width: 320px;
+} 

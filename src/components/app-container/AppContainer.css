@@ -1,0 +1,13 @@
+.content {
+    display: flex;
+    
+    flex-direction: column;
+    background-color: white;
+    position: relative;
+  }
+  .container {
+    width: 100%;
+    max-width: 60%;
+    background-color: whitesmoke;
+    position: relative;
+  }
