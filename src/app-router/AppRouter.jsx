@@ -8,7 +8,7 @@ class AppRouter extends Component {
       <div>
         <Switch>
           <Route path="/courses/new" component={EditCoursePage} />
-          <Route path="/courses/:id" component={EditCoursePage} />
+          <Route path="/courses/details/:id" component={EditCoursePage} />
           <Route path="/courses" component={CoursesPage} />
           <Route path="/login" component={LoginPage} />
         </Switch>
