@@ -12,6 +12,7 @@ export class CourseItem extends Component {
 
     editCourse = () => {
         const { handleEditCourseClick, course } = this.props;
+        console.log(this.props);
         handleEditCourseClick(course.id);
     }
 
@@ -24,7 +25,7 @@ export class CourseItem extends Component {
                         <CardContent className='course-content'>
                             <div className="course-title">
                                 <Typography className="course-name" gutterBottom variant="display1" component="h1">
-                                    {course.name}
+                                    {course.title}
                                 </Typography>
                                 <Typography className="course-duration" gutterBottom variant="display1" component="h4">
                                     {course.duration}
@@ -39,11 +40,9 @@ export class CourseItem extends Component {
                             </Typography>
                         </CardContent>
                         <div className='managment'>
-                            {/* <Link to={`edit/${course.id}`}> */}
                                 <Button variant="fab" className="edit-button" onClick={this.editCourse} color="secondary" aria-label="Edit">
                                     <EditIcon />
                                 </Button>
-                            {/* </Link> */}
                             <Button variant="fab" className="delete-button" aria-label="Delete">
                                 <DeleteIcon />
                             </Button>

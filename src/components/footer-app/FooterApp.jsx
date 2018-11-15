@@ -4,13 +4,8 @@ import './FooterApp.css'
 export class FooterApp extends React.Component {
     render() {
         return (
-            <div color="blue" className="footer font-small pt-4 mt-4">
-                <div className="footer-copyright text-center py-3">
-                    <div fluid className="copyright">
-                        &copy; {new Date().getFullYear()} Copyright:{" "}
-                        <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
-                    </div>
-                </div>
+            <div className="footer">
+                <p>Footer</p>
             </div>
         );
     }

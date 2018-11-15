@@ -1,86 +1,79 @@
 import React, { Component } from "react";
-import { getCourseById, getPossibleAuthors, getCourseAuthors } from "../../db/db";
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
+import PropTypes from 'prop-types';
 import "./EditCourse.css";
 
 export class EditCourse extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            course: {},
-            possibleAuthors: [],
-            courseAuthors: []
-        };
-    }
-
-    componentDidMount() {
-        const course = getCourseById(this.props.match.params.id);
-        const possibleAuthors = getPossibleAuthors(course.authorIds);
-        const courseAuthors = getCourseAuthors(course.authorIds);
-        this.setState({
-            course,
-            possibleAuthors,
-            courseAuthors
-        })
-    }
     render() {
+        const { course, courseAuthors, possibleAuthors, onChange, onSave } = this.props;
         return (
             <div className="container-fluid d-flex flex-column">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Title</span>
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="basic-addon1">Title</span>
                     </div>
                     <input type="text"
-                        class="form-control"
+                        className="form-control"
+                        name="title"
+                        onChange={onChange}
                         placeholder="Title"
                         aria-label="Title"
-                        value={this.state.course.name}
+                        value={course.title}
                         aria-describedby="basic-addon1" />
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Description</span>
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text">Description</span>
                     </div>
-                    <textarea class="form-control"
+                    <textarea name="description"
+                        className="form-control"
+                        placeholder="Description"
                         aria-label="Description"
-                        value={this.state.course.description}></textarea>
+                        onChange={onChange}
+                        value={course.description}></textarea>
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Date</span>
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="basic-addon1">Date</span>
                     </div>
                     <input type="text"
-                        class="form-control"
+                        className="form-control"
+                        name="date"
                         placeholder="Date"
                         type="date"
                         aria-label="Date"
-                        value={this.state.course.date}
+                        onChange={onChange}
+                        value={course.date}
                         aria-describedby="basic-addon1" />
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Duration</span>
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="basic-addon1">Duration</span>
                     </div>
                     <input type="text"
-                        class="form-control"
+                        className="form-control"
                         placeholder="Duration"
+                        name="duration"
                         type="number"
                         min="0"
+                        onChange={onChange}
                         aria-label="Duration"
-                        value={this.state.course.duration}
+                        value={course.duration}
                         aria-describedby="basic-addon1" />
                 </div>
+
                 <div className="authors d-flex justify-content-between">
-                    <ul className="potential-authors-list pl-0 m-0 float-left">
+
+                    <select multiple class="form-control pl-0 m-0 w-25 float-left">
                         {
-                            this.state.possibleAuthors.map((author) =>
-                                <button key={author.id} type="button" className="list-group-item list-group-item-action">{author.name}</button>
+                            possibleAuthors.map((author) =>
+                                <option>{author.name}</option>
                             )
                         }
-                    </ul>
+                    </select>
+
                     <div className="managment-course d-flex flex-column">
                         <div className="h-50 d-flex align-items-center">
                             <button className="btn btn-secondary" color="secondary">
@@ -93,15 +86,15 @@ export class EditCourse extends Component {
                             </button>
                         </div>
                     </div>
-                    <ul className="course-authors-list pl-0 m-0 float-right">
+                    <ul className="course-authors-list pl-0 m-0 w-25 float-right">
                         {
-                            this.state.courseAuthors.map((author) =>
+                            courseAuthors.map((author) =>
                                 <button key={author.id} type="button" className="list-group-item list-group-item-action">{author.name}</button>)
                         }
                     </ul>
                 </div>
                 <div className="d-flex justify-content-around m-3">
-                    <button className="btn btn-info btn-lg">
+                    <button onClick={onSave} className="btn btn-info btn-lg">
                         Save
                     </button>
                     <button className="btn btn-danger btn-lg">
@@ -111,4 +104,20 @@ export class EditCourse extends Component {
             </div>
         );
     }
+}
+
+EditCourse.propTypes = {
+    course: PropTypes.shape({
+        title: PropTypes.string,
+        description: PropTypes.string
+    }).isRequired,
+
+    onChange: PropTypes.func.isRequired,
+    courseAuthors: PropTypes.arrayOf(PropTypes.shape({
+
+    }).isRequired).isRequired,
+    possibleAuthors: PropTypes.arrayOf(PropTypes.shape({
+
+    }).isRequired).isRequired,
+
 }

@@ -22,11 +22,15 @@ class CourseListBlock extends Component {
     }
 
     handleEditCourseClick = (id) => {
-        this.props.history.push(`courses/${id}`);
+        this.props.history.push(`courses/details/${id}`);
     }
 
     renderCourses = () => {
-        return this.state.courses.map(courseItem => <CourseItem key={courseItem.id} course={courseItem} handleEditCourseClick={this.handleEditCourseClick} />);
+        return this.state.courses.map(courseItem =>
+            <CourseItem
+                key={courseItem.id}
+                course={courseItem}
+                handleEditCourseClick={this.handleEditCourseClick} />);
     }
     render() {
         return (

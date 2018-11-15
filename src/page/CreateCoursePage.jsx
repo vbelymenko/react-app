@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
-import { getCourseById, getPossibleAuthors, getCourseAuthors, updateCourse } from "../db/db";
+import { getPossibleAuthors, createCourse } from "../db/db";
 import { withRouter } from "react-router-dom";
 
-export class EditCoursePageContainer extends Component {
+export class CreateCoursePageContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -16,15 +16,16 @@ export class EditCoursePageContainer extends Component {
     }
 
     componentDidMount() {
-        const course = getCourseById(this.props.match.params.id);
-        const possibleAuthors = getPossibleAuthors(course.authorIds);
-        const courseAuthors = getCourseAuthors(course.authorIds);
+        const course = { title: "", authorIds: [], description: '', duration: '', date: '2000-01-01' };
+        const possibleAuthors = getPossibleAuthors([]);
+        const courseAuthors = course.authorIds;
         this.setState({
             course,
             possibleAuthors,
             courseAuthors
         })
     }
+
     handleChange = (event) => {
         this.setState({
             ...this.state,
@@ -36,9 +37,10 @@ export class EditCoursePageContainer extends Component {
     }
 
     handleSave = () => {
-        updateCourse(this.state.course);
+        createCourse(this.state.course);
         this.props.history.push(`/courses`);
     }
+
     render() {
         return (
             <AppContainer>
@@ -53,4 +55,4 @@ export class EditCoursePageContainer extends Component {
     }
 }
 
-export const EditCoursePage = withRouter(EditCoursePageContainer);
+export const CreateCoursePage = withRouter(CreateCoursePageContainer);
