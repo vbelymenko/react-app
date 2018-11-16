@@ -8,21 +8,20 @@ const courses = [
 
 ];
 const authors = [
-    { id: 1, name: 'Aardman Animation' },
-    { id: 2, name: 'Morra Aarons-Mele' },
-    { id: 3, name: 'Stephan Abarbanell' },
-    { id: 4, name: 'Christmas Abbott' },
-    { id: 5, name: 'Karen Abbott' },
-    { id: 6, name: 'Tessa Aberjonois' },
-    { id: 7, name: 'Derek Acorah' },
-    { id: 8, name: 'Daniel Abraham' }
+    { id: 1, isSelected: false, name: 'Aardman Animation' },
+    { id: 2, isSelected: false, name: 'Morra Aarons-Mele' },
+    { id: 3, isSelected: false, name: 'Stephan Abarbanell' },
+    { id: 4, isSelected: false, name: 'Christmas Abbott' },
+    { id: 5, isSelected: false, name: 'Karen Abbott' },
+    { id: 6, isSelected: false, name: 'Tessa Aberjonois' },
+    { id: 7, isSelected: false, name: 'Derek Acorah' },
+    { id: 8, isSelected: false, name: 'Daniel Abraham' }
 ];
 const defaultCourse = { name: '', authorIds: [], description: '', duration: '', date: '2000-01-01' };
 
 
 
 export const getCourseById = (id) => {
-    debugger
     return courses[id];
 }
 

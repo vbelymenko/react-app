@@ -1,5 +1,9 @@
 
-.potential-authors-list, .course-authors-list {
+.possible-authors-list, .course-authors-list {
     overflow: auto;
     max-height: 200px;
+}
+
+.selected {
+    background-color: #17a2b8;
 }

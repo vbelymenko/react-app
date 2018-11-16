@@ -7,7 +7,7 @@ import "./EditCourse.css";
 export class EditCourse extends Component {
 
     render() {
-        const { course, courseAuthors, possibleAuthors, onChange, onSave } = this.props;
+        const { course, courseAuthors, onSelectPossibleAuthors, onSelectCourseAuthors, possibleAuthors, onChange, onSave, onAdd, onRemove } = this.props;
         return (
             <div className="container-fluid d-flex flex-column">
                 <div className="input-group mb-3">
@@ -66,22 +66,26 @@ export class EditCourse extends Component {
 
                 <div className="authors d-flex justify-content-between">
 
-                    <select multiple class="form-control pl-0 m-0 w-25 float-left">
+                    <ul className="possible-authors-list pl-0 m-0 w-25 float-left">
                         {
                             possibleAuthors.map((author) =>
-                                <option>{author.name}</option>
-                            )
+                                <button
+                                    onClick={onSelectPossibleAuthors}
+                                    key={author.id}
+                                    id={author.id}
+                                    type="button"
+                                    className={`list-group-item w-100 ${author.isSelected ? 'selected' : ''}`} >{author.name}</button>)
                         }
-                    </select>
+                    </ul>
 
                     <div className="managment-course d-flex flex-column">
                         <div className="h-50 d-flex align-items-center">
-                            <button className="btn btn-secondary" color="secondary">
+                            <button onClick={onAdd} className="btn btn-secondary" color="secondary">
                                 <ArrowForward />
                             </button>
                         </div>
                         <div className="h-50 d-flex align-items-center">
-                            <button className="btn btn-secondary" >
+                            <button onClick={onRemove} className="btn btn-secondary">
                                 <ArrowBack />
                             </button>
                         </div>
@@ -89,7 +93,10 @@ export class EditCourse extends Component {
                     <ul className="course-authors-list pl-0 m-0 w-25 float-right">
                         {
                             courseAuthors.map((author) =>
-                                <button key={author.id} type="button" className="list-group-item list-group-item-action">{author.name}</button>)
+                                <button onClick={onSelectCourseAuthors}
+                                    key={author.id}
+                                    id={author.id} type="button"
+                                    className={`list-group-item w-100 ${author.isSelected ? 'selected' : ''}`} >{author.name}</button>)
                         }
                     </ul>
                 </div>
