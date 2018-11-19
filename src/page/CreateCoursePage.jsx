@@ -3,7 +3,6 @@ import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
 import { getPossibleAuthors, createCourse } from "../db/db";
 import { withRouter } from "react-router-dom";
-import axios from 'axios';
 
 
 export class CreateCoursePageContainer extends Component {
@@ -18,10 +17,6 @@ export class CreateCoursePageContainer extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8080/courses`)
-            .then(res => {
-               console.log(res);
-            })
         const course = { title: "", authorIds: [], description: '', duration: '', date: '2000-01-01' };
         const possibleAuthors = getPossibleAuthors([]);
         const courseAuthors = course.authorIds;

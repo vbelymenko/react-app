@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { CourseItem } from '../course-item';
-import { getAll } from "../../db/db";
 import { withRouter } from "react-router-dom";
-
+import { getAllCourses } from '../../actions/course-actions';
+import { allCoursesSelector } from '../../selectors/courseSelector';
 
 class CourseListBlock extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            courses: []
-        };
-    }
-
     componentDidMount() {
-        const courses = getAll();
-        this.setState({
-            courses
-        })
+        console.log("-----");
+        this.props.getAllCourses();
     }
 
     handleEditCourseClick = (id) => {
@@ -26,7 +17,7 @@ class CourseListBlock extends Component {
     }
 
     renderCourses = () => {
-        return this.state.courses.map(courseItem =>
+        return this.props.courses.map(courseItem =>
             <CourseItem
                 key={courseItem.id}
                 course={courseItem}
@@ -38,4 +29,11 @@ class CourseListBlock extends Component {
         );
     }
 }
-export const CourseList = withRouter(CourseListBlock);
+
+const mapStateToProps = (state) => {
+    return {
+        courses: allCoursesSelector(state)
+    }
+}
+
+export const CourseList = withRouter(connect(mapStateToProps, { getAllCourses })(CourseListBlock));

@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import "./EditCourse.css";
 
-export class EditCourse extends Component {
+export class EditCourse1 extends Component {
 
     render() {
+        console.log(this.props.courses);
         const { course, courseAuthors, onSelectPossibleAuthors, onSelectCourseAuthors, possibleAuthors, onChange, onSave, onAdd, onRemove } = this.props;
         return (
             <div className="container-fluid d-flex flex-column">
@@ -113,7 +115,7 @@ export class EditCourse extends Component {
     }
 }
 
-EditCourse.propTypes = {
+EditCourse1.propTypes = {
     course: PropTypes.shape({
         title: PropTypes.string,
         description: PropTypes.string
@@ -128,3 +130,11 @@ EditCourse.propTypes = {
     }).isRequired).isRequired,
 
 }
+
+const mapStateToProps = (state) => {
+    return {
+      courses: state.courses
+    }
+  } 
+
+  export const EditCourse = connect(mapStateToProps)(EditCourse1);
