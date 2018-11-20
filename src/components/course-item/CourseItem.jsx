@@ -12,8 +12,11 @@ export class CourseItem extends Component {
 
     editCourse = () => {
         const { handleEditCourseClick, course } = this.props;
-        console.log(this.props);
         handleEditCourseClick(course.id);
+    }
+    removeCourse = () => {
+        const { handleRemoveCourseClick, course } = this.props;
+        handleRemoveCourseClick(course.id);
     }
 
     render() {
@@ -43,7 +46,7 @@ export class CourseItem extends Component {
                                 <Button variant="fab" className="edit-button" onClick={this.editCourse} color="secondary" aria-label="Edit">
                                     <EditIcon />
                                 </Button>
-                            <Button variant="fab" className="delete-button" aria-label="Delete">
+                            <Button variant="fab" className="delete-button" onClick={this.removeCourse} aria-label="Delete">
                                 <DeleteIcon />
                             </Button>
                         </div>

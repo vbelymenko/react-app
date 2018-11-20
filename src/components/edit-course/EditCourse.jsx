@@ -38,8 +38,7 @@ export class EditCourse extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="basic-addon1">Date</span>
                     </div>
-                    <input type="text"
-                        className="form-control"
+                    <input className="form-control"
                         name="date"
                         placeholder="Date"
                         type="date"
@@ -52,8 +51,7 @@ export class EditCourse extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="basic-addon1">Duration</span>
                     </div>
-                    <input type="text"
-                        className="form-control"
+                    <input className="form-control"
                         placeholder="Duration"
                         name="duration"
                         type="number"
@@ -66,7 +64,7 @@ export class EditCourse extends Component {
 
                 <div className="authors d-flex justify-content-between">
 
-                    <select multiple class="form-control pl-0 m-0 w-25 float-left">
+                    <select multiple className="form-control pl-0 m-0 w-25 float-left">
                         {
                             possibleAuthors.map((author) =>
                                 <option>{author.name}</option>

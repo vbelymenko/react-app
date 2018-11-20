@@ -3,6 +3,7 @@ import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
 import { getCourseById, getPossibleAuthors, getCourseAuthors, updateCourse } from "../db/db";
 import { withRouter } from "react-router-dom";
+import axios from 'axios';
 
 export class EditCoursePageContainer extends Component {
     constructor(props) {
@@ -16,11 +17,16 @@ export class EditCoursePageContainer extends Component {
     }
 
     componentDidMount() {
-        const course = getCourseById(this.props.match.params.id);
-        const possibleAuthors = getPossibleAuthors(course.authorIds);
-        const courseAuthors = getCourseAuthors(course.authorIds);
+        //FIX THIS
+        axios.get(`http://localhost:8080/courses/${this.props.match.params.id}`)
+            .then(response => response.data)
+            .then(course => this.setState({
+                course
+            }));
+        console.log(this.state);
+        const possibleAuthors = getPossibleAuthors(this.state.course.authorIds);
+        const courseAuthors = getCourseAuthors(this.state.course.authorIds);
         this.setState({
-            course,
             possibleAuthors,
             courseAuthors
         })

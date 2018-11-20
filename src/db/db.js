@@ -17,9 +17,6 @@ const authors = [
     { id: 7, name: 'Derek Acorah' },
     { id: 8, name: 'Daniel Abraham' }
 ];
-const defaultCourse = { name: '', authorIds: [], description: '', duration: '', date: '2000-01-01' };
-
-
 
 export const getCourseById = (id) => {
     debugger

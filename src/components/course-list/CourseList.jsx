@@ -1,35 +1,27 @@
 import React, { Component } from 'react';
 import { CourseItem } from '../course-item';
-import { getAll } from "../../db/db";
 import { withRouter } from "react-router-dom";
+import listCoursesWrapper from '../../hoc/ListCoursesWrapper';
 
 
 class CourseListBlock extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            courses: []
-        };
-    }
-
-    componentDidMount() {
-        const courses = getAll();
-        this.setState({
-            courses
-        })
-    }
 
     handleEditCourseClick = (id) => {
         this.props.history.push(`courses/details/${id}`);
     }
 
+    handleRemoveCourseClick = (id) => {
+        const { remove } = this.props;
+        remove(id);
+    }
+
     renderCourses = () => {
-        return this.state.courses.map(courseItem =>
+        const { data } = this.props;
+        return data.map(courseItem =>
             <CourseItem
                 key={courseItem.id}
                 course={courseItem}
+                handleRemoveCourseClick={this.handleRemoveCourseClick}
                 handleEditCourseClick={this.handleEditCourseClick} />);
     }
     render() {
@@ -38,4 +30,5 @@ class CourseListBlock extends Component {
         );
     }
 }
-export const CourseList = withRouter(CourseListBlock);
+const CourseListWithRouter = withRouter(CourseListBlock);
+export const CourseList = listCoursesWrapper(CourseListWithRouter, 'http://localhost:8080/courses');
