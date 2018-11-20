@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
-import { getCourseById, getPossibleAuthors, getCourseAuthors, updateCourse } from "../db/db";
+import { getAll } from "../api/CoursesApi";
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
@@ -17,15 +17,8 @@ export class EditCoursePageContainer extends Component {
     }
 
     componentDidMount() {
-        //FIX THIS
-        axios.get(`http://localhost:8080/courses/${this.props.match.params.id}`)
-            .then(response => response.data)
-            .then(course => this.setState({
-                course
-            }));
-        console.log(this.state);
-        const possibleAuthors = getPossibleAuthors(this.state.course.authorIds);
-        const courseAuthors = getCourseAuthors(this.state.course.authorIds);
+        const possibleAuthors = [];
+        const courseAuthors = [];
         this.setState({
             possibleAuthors,
             courseAuthors
@@ -42,7 +35,7 @@ export class EditCoursePageContainer extends Component {
     }
 
     handleSave = () => {
-        updateCourse(this.state.course);
+        // updateCourse(this.state.course);
         this.props.history.push(`/courses`);
     }
     render() {
