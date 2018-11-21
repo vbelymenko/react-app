@@ -16,28 +16,34 @@ export class LoginForm extends Component {
         return this.state.email.length > 0 && this.state.password.length > 0;
     }
 
-    handleSubmit = (event, name) => {
-        localStorage.setItem('user', name);
+    handleSubmit = (event, email) => {
+        localStorage.setItem('user', email);
+    }
+
+    handleChange = (name,  event) => {
+        this.setState({
+            [name]: event.target.value
+        });
     }
 
     render() {
         return (
             <div className="Login">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={(e) => this.handleSubmit(e, this.state.email)}>
                     <FormGroup controlId="email" bsSize="large">
                         <ControlLabel>Email</ControlLabel>
                         <FormControl
                             autoFocus
-                            type="email"
+                            type="text"
                             value={this.state.email}
-                            onChange={this.handleChange}
+                            onChange={(e) => this.handleChange('email', e)}
                         />
                     </FormGroup>
                     <FormGroup controlId="password" bsSize="large">
                         <ControlLabel>Password</ControlLabel>
                         <FormControl
                             value={this.state.password}
-                            onChange={this.handleChange}
+                            onChange={(e) => this.handleChange('password', e)}
                             type="password"
                         />
                     </FormGroup>

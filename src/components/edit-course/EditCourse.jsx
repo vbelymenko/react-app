@@ -6,6 +6,21 @@ import "./EditCourse.css";
 
 export class EditCourse extends Component {
 
+    static get propTypes() {
+        return {
+            course: PropTypes.shape({
+                title: PropTypes.string,
+                description: PropTypes.string,
+                date: PropTypes.string,
+                duration: PropTypes.string
+            }).isRequired,
+            courseAuthors: PropTypes.arrayOf(PropTypes.number).isRequired,
+            possibleAuthors: PropTypes.arrayOf(PropTypes.number).isRequired,
+            onChange: PropTypes.func.isRequired,
+            onSave: PropTypes.func.isRequired
+        };
+    }
+
     render() {
         const { course, courseAuthors, possibleAuthors, onChange, onSave } = this.props;
         return (
@@ -17,7 +32,7 @@ export class EditCourse extends Component {
                     <input type="text"
                         className="form-control"
                         name="title"
-                        onChange={onChange}
+                        onChange={(e) => onChange(e, 'title')}
                         placeholder="Title"
                         aria-label="Title"
                         value={course.title}
@@ -31,7 +46,7 @@ export class EditCourse extends Component {
                         className="form-control"
                         placeholder="Description"
                         aria-label="Description"
-                        onChange={onChange}
+                        onChange={(e) => onChange(e, 'description')}
                         value={course.description}></textarea>
                 </div>
                 <div className="input-group mb-3">
@@ -43,7 +58,7 @@ export class EditCourse extends Component {
                         placeholder="Date"
                         type="date"
                         aria-label="Date"
-                        onChange={onChange}
+                        onChange={(e) => onChange(e, 'date')}
                         value={course.date}
                         aria-describedby="basic-addon1" />
                 </div>
@@ -56,7 +71,7 @@ export class EditCourse extends Component {
                         name="duration"
                         type="number"
                         min="0"
-                        onChange={onChange}
+                        onChange={(e) => onChange(e, 'duration')}
                         aria-label="Duration"
                         value={course.duration}
                         aria-describedby="basic-addon1" />
@@ -102,20 +117,4 @@ export class EditCourse extends Component {
             </div>
         );
     }
-}
-
-EditCourse.propTypes = {
-    course: PropTypes.shape({
-        title: PropTypes.string,
-        description: PropTypes.string
-    }).isRequired,
-
-    onChange: PropTypes.func.isRequired,
-    courseAuthors: PropTypes.arrayOf(PropTypes.shape({
-
-    }).isRequired).isRequired,
-    possibleAuthors: PropTypes.arrayOf(PropTypes.shape({
-
-    }).isRequired).isRequired,
-
 }

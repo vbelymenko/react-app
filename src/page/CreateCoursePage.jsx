@@ -26,12 +26,12 @@ export class CreateCoursePageContainer extends Component {
         })
     }
 
-    handleChange = (event) => {
+    handleChange = (event, field) => {
         this.setState({
             ...this.state,
             course: {
                 ...this.state.course,
-                [event.target.name]: event.target.value
+                [field]: event.target.value
             }
         });
     }

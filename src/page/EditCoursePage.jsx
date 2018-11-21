@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
-import { getAll } from "../api/CoursesApi";
+// import { getAll } from "../api/CoursesApi";
 import { withRouter } from "react-router-dom";
-import axios from 'axios';
+// import axios from 'axios';
 
 export class EditCoursePageContainer extends Component {
     constructor(props) {
@@ -24,12 +24,12 @@ export class EditCoursePageContainer extends Component {
             courseAuthors
         })
     }
-    handleChange = (event) => {
+    handleChange = (event, field) => {
         this.setState({
             ...this.state,
             course: {
                 ...this.state.course,
-                [event.target.name]: event.target.value
+                [field]: event.target.value
             }
         });
     }

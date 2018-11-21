@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import { CourseItem } from '../course-item';
 import { withRouter } from "react-router-dom";
-import { getAll } from "../../api/CoursesApi";
+import { getAll, remove } from "../../api/CoursesApi";
 
 
 class CourseListBlock extends Component {
 
-    state = {
-        data: []
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: []
+        };
     }
+
+    
 
     handleEditCourseClick = (id) => {
         this.props.history.push(`courses/details/${id}`);
     }
 
     handleRemoveCourseClick = (id) => {
-        const { remove } = this.props;
         remove(id);
     }
 

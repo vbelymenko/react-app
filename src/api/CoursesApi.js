@@ -7,8 +7,8 @@ const apify = axiosPromise =>
         axiosPromise.then(({ data }) => resolve(data)).catch(reject)
     );
 
-export const remove = id => apify(axios.delete(`${apiUrl}/${id}`));
+export const remove = (id) => apify(axios.delete(`${apiUrl}/${id}`));
 
-export const get = id => apify(axios.get(`${apiUrl}/${id}`));
+export const get = (id) => apify(axios.get(`${apiUrl}/${id}`));
 
 export const getAll = () => apify(axios.get(apiUrl));
