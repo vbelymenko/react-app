@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 import "./LoginForm.css";
 
-export class LoginForm extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
 
@@ -18,9 +19,10 @@ export class LoginForm extends Component {
 
     handleSubmit = (event, email) => {
         localStorage.setItem('user', email);
+        this.props.history.push('courses');
     }
 
-    handleChange = (name,  event) => {
+    handleChange = (name, event) => {
         this.setState({
             [name]: event.target.value
         });
@@ -60,3 +62,5 @@ export class LoginForm extends Component {
         );
     }
 }
+
+export const LoginForm = withRouter(Login);
