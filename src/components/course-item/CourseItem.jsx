@@ -14,6 +14,10 @@ export class CourseItem extends Component {
         const { handleEditCourseClick, course } = this.props;
         handleEditCourseClick(course.id);
     }
+    removeCourse = () => {
+        const { handleRemoveCourseClick, course } = this.props;
+        handleRemoveCourseClick(course.id);
+    }
 
     render() {
         const { course } = this.props;
@@ -24,7 +28,7 @@ export class CourseItem extends Component {
                         <CardContent className='course-content'>
                             <div className="course-title">
                                 <Typography className="course-name" gutterBottom variant="display1" component="h1">
-                                    {course.name}
+                                    {course.title}
                                 </Typography>
                                 <Typography className="course-duration" gutterBottom variant="display1" component="h4">
                                     {course.duration}
@@ -39,12 +43,10 @@ export class CourseItem extends Component {
                             </Typography>
                         </CardContent>
                         <div className='managment'>
-                            {/* <Link to={`edit/${course.id}`}> */}
                                 <Button variant="fab" className="edit-button" onClick={this.editCourse} color="secondary" aria-label="Edit">
                                     <EditIcon />
                                 </Button>
-                            {/* </Link> */}
-                            <Button variant="fab" className="delete-button" aria-label="Delete">
+                            <Button variant="fab" className="delete-button" onClick={this.removeCourse} aria-label="Delete">
                                 <DeleteIcon />
                             </Button>
                         </div>

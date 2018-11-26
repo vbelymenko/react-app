@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CourseItem } from '../course-item';
-import { getAll } from "../../db/db";
 import { withRouter } from "react-router-dom";
+import { getAll, remove } from "../../api/CoursesApi";
 
 
 class CourseListBlock extends Component {
@@ -10,23 +10,29 @@ class CourseListBlock extends Component {
         super(props);
 
         this.state = {
-            courses: []
+            data: []
         };
     }
 
-    componentDidMount() {
-        const courses = getAll();
-        this.setState({
-            courses
-        })
-    }
+    
 
     handleEditCourseClick = (id) => {
-        this.props.history.push(`courses/${id}`);
+        this.props.history.push(`courses/details/${id}`);
+    }
+
+    handleRemoveCourseClick = (id) => {
+        remove(id);
     }
 
     renderCourses = () => {
-        return this.state.courses.map(courseItem => <CourseItem key={courseItem.id} course={courseItem} handleEditCourseClick={this.handleEditCourseClick} />);
+        getAll()
+            .then(courses => this.setState({ data: courses }));
+        return this.state.data.map(courseItem =>
+            <CourseItem
+                key={courseItem.id}
+                course={courseItem}
+                handleRemoveCourseClick={this.handleRemoveCourseClick}
+                handleEditCourseClick={this.handleEditCourseClick} />);
     }
     render() {
         return (

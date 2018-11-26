@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
-// import { getAll } from "../api/CoursesApi";
+// import { getPossibleAuthors, createCourse } from "../db/db";
 import { withRouter } from "react-router-dom";
-// import axios from 'axios';
 
-export class EditCoursePageContainer extends Component {
+export class CreateCoursePageContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -17,13 +16,16 @@ export class EditCoursePageContainer extends Component {
     }
 
     componentDidMount() {
+        const course = { title: "", authorIds: [], description: '', duration: '', date: '2000-01-01' };
         const possibleAuthors = [];
-        const courseAuthors = [];
+        const courseAuthors = course.authorIds;
         this.setState({
+            course,
             possibleAuthors,
             courseAuthors
         })
     }
+
     handleChange = (event, field) => {
         this.setState({
             ...this.state,
@@ -35,9 +37,10 @@ export class EditCoursePageContainer extends Component {
     }
 
     handleSave = () => {
-        // updateCourse(this.state.course);
+        // createCourse(this.state.course);
         this.props.history.push(`/courses`);
     }
+
     render() {
         return (
             <AppContainer>
@@ -52,4 +55,4 @@ export class EditCoursePageContainer extends Component {
     }
 }
 
-export const EditCoursePage = withRouter(EditCoursePageContainer);
+export const CreateCoursePage = withRouter(CreateCoursePageContainer);
