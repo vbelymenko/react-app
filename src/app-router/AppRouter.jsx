@@ -4,6 +4,7 @@ import { LoginPage, CoursesPage, EditCoursePage, CreateCoursePage, NotFoundPage 
 import { PrivateRoute } from '../hoc/PrivateRouter';
 
 class AppRouter extends Component {
+  
   render() {
     return (
       <div>

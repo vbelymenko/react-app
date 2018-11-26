@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { CourseItem } from '../course-item';
 import { withRouter } from "react-router-dom";
-import { getAll, remove } from "../../api/CoursesApi";
+import { connect } from 'react-redux';
+import { getAll, remove } from '../../api/CoursesApi';
+import { getCoursesSuccess } from '../../actions/courseActions';
 
 
 class CourseListBlock extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            data: []
-        };
+    componentDidMount(){
+        this.props.dispatch(getCoursesSuccess([]));
     }
-
-    
 
     handleEditCourseClick = (id) => {
         this.props.history.push(`courses/details/${id}`);
@@ -25,9 +21,7 @@ class CourseListBlock extends Component {
     }
 
     renderCourses = () => {
-        getAll()
-            .then(courses => this.setState({ data: courses }));
-        return this.state.data.map(courseItem =>
+        return this.props.courses.map(courseItem =>
             <CourseItem
                 key={courseItem.id}
                 course={courseItem}
@@ -40,4 +34,10 @@ class CourseListBlock extends Component {
         );
     }
 }
-export const CourseList = withRouter(CourseListBlock);
+const mapStateToProps = (store) => {
+    return {
+        courses: store.courses
+    };
+}
+
+export const CourseList = withRouter(connect(mapStateToProps)(CourseListBlock));

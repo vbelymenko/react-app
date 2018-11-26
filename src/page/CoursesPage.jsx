@@ -6,10 +6,11 @@ import { Navigation } from "../components/navigation";
 export class CoursesPage extends Component {
 
     render() {
+        console.log(this.props.store);
         return (
             <AppContainer>
                 <Navigation />
-                <CourseList />
+                <CourseList courses={[]}/>
             </AppContainer>
         );
     }
