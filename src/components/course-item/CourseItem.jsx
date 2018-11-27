@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 import './CourseItem.css';
 
 
@@ -43,9 +44,9 @@ export class CourseItem extends Component {
                             </Typography>
                         </CardContent>
                         <div className='managment'>
-                                <Button variant="fab" className="edit-button" onClick={this.editCourse} color="secondary" aria-label="Edit">
-                                    <EditIcon />
-                                </Button>
+                            <Button variant="fab" className="edit-button" color="secondary" aria-label="Edit">
+                                <Link to={`courses/details/${course.id}`}><EditIcon /></Link>
+                            </Button>
                             <Button variant="fab" className="delete-button" onClick={this.removeCourse} aria-label="Delete">
                                 <DeleteIcon />
                             </Button>

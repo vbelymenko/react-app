@@ -1,38 +1,25 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
+import { getById } from '../actions/courses';
 // import { getAll } from "../api/CoursesApi";
 import { withRouter } from "react-router-dom";
 // import axios from 'axios';
 
 export class EditCoursePageContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            course: {},
-            possibleAuthors: [],
-            courseAuthors: []
-        };
-    }
 
     componentDidMount() {
-        const possibleAuthors = [];
-        const courseAuthors = [];
-        this.setState({
-            possibleAuthors,
-            courseAuthors
-        })
+        this.props.dispatch(getById());
     }
-    handleChange = (event, field) => {
-        this.setState({
-            ...this.state,
-            course: {
-                ...this.state.course,
-                [field]: event.target.value
-            }
-        });
-    }
+    // handleChange = (event, field) => {
+    //     this.setState({
+    //         ...this.state,
+    //         course: {
+    //             ...this.state.course,
+    //             [field]: event.target.value
+    //         }
+    //     });
+    // }
 
     handleSave = () => {
         // updateCourse(this.state.course);

@@ -14,3 +14,7 @@ export const remove = (id) => dispatch => {
             dispatch(deleteCourseSuccess(id));
         });
 };
+
+export const getById = (id) => dispatch => {
+    dispatch(deleteCourseSuccess(id));
+};

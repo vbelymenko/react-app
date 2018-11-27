@@ -35,7 +35,7 @@ export class CoursesContainer extends Component {
 
 const mapStateToProps = (store) => {
     return {
-        courses: store.courses
+        courses: store.coursesReducer.courses
     };
 }
 

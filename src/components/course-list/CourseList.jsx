@@ -6,6 +6,7 @@ export class CourseList extends Component {
 
     renderCourses = () => {
         const { onRemove, onEdit, courses } = this.props;
+        debugger
         return courses.map(courseItem =>
             <CourseItem
                 key={courseItem.id}
