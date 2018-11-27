@@ -30,8 +30,9 @@ public class CourseService {
         return course;
     }
 
-    public void delete(Long id) {
+    public Long delete(Long id) {
         courses.remove(id);
+        return id;
     }
 
     public Course update(Course course) {

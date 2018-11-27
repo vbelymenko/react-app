@@ -1,14 +1,16 @@
-import * as api from '../api';
-import actionTypes from './courseActions';
+import * as api from '../api/CoursesApi';
+import { getCoursesSuccess, deleteCourseSuccess } from './courseActions';
 
-export const getCoursesList = () => dispatch => {
-    dispatch({ type: actionTypes.GET_COURSES_LIST });
-    api
-        .getCoursesList()
+export const getAll = () => dispatch => {
+    api.getAll()
         .then(courses => {
-            dispatch({
-                type: actionTypes.GET_COURSES_LIST,
-                payload: { courses },
-            });
+            dispatch(getCoursesSuccess(courses));
+        });
+};
+
+export const remove = (id) => dispatch => {
+    api.remove(id)
+        .then(id => {
+            dispatch(deleteCourseSuccess(id));
         });
 };

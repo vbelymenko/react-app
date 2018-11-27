@@ -15,18 +15,18 @@ public class CourseController {
     private CourseService courseService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public void create(Course course) {
-        courseService.create(course);
+    public Course create(Course course) {
+        return courseService.create(course);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void update(Course course) {
-        courseService.update(course);
+    public Course update(Course course) {
+        return courseService.update(course);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id) {
-        courseService.delete(id);
+    public Long delete(@PathVariable("id") Long id) {
+        return courseService.delete(id);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)

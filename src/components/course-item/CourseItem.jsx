@@ -11,12 +11,12 @@ import './CourseItem.css';
 export class CourseItem extends Component {
 
     editCourse = () => {
-        const { handleEditCourseClick, course } = this.props;
-        handleEditCourseClick(course.id);
+        const { onEdit, course } = this.props;
+        onEdit(course.id);
     }
     removeCourse = () => {
-        const { handleRemoveCourseClick, course } = this.props;
-        handleRemoveCourseClick(course.id);
+        const { onRemove, course } = this.props;
+        onRemove(course.id);
     }
 
     render() {
