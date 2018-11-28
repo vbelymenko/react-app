@@ -1,42 +1,56 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
-import { getById } from '../actions/courses';
-// import { getAll } from "../api/CoursesApi";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/courses';
 import { withRouter } from "react-router-dom";
-// import axios from 'axios';
 
 export class EditCoursePageContainer extends Component {
 
     componentDidMount() {
-        this.props.dispatch(getById());
+        this.props.actions.getById(this.props.match.params.id);
     }
-    // handleChange = (event, field) => {
-    //     this.setState({
-    //         ...this.state,
-    //         course: {
-    //             ...this.state.course,
-    //             [field]: event.target.value
-    //         }
-    //     });
-    // }
+    handleChange = (event, field) => {
+        console.log(field);
+        console.log(event.target.value);
+        // this.setState({
+        //     ...this.state,
+        //     course: {
+        //         ...this.state.course,
+        //         [field]: event.target.value
+        //     }
+        // });
+    }
 
     handleSave = () => {
-        // updateCourse(this.state.course);
+        this.props.actions.update(this.props.course);
         this.props.history.push(`/courses`);
     }
     render() {
         return (
             <AppContainer>
                 <EditCourse
-                    course={this.state.course}
+                    course={this.props.course}
                     onChange={this.handleChange}
                     onSave={this.handleSave}
-                    possibleAuthors={this.state.possibleAuthors}
-                    courseAuthors={this.state.courseAuthors} />
+                    possibleAuthors={[]}
+                    courseAuthors={[]} />
             </AppContainer>
         );
     }
 }
 
-export const EditCoursePage = withRouter(EditCoursePageContainer);
+const mapStateToProps = (state) => {
+    return {
+        course: state.course.courseEntity
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
+
+export const EditCoursePage = withRouter(connect(mapStateToProps, mapDispatchToProps)(EditCoursePageContainer));

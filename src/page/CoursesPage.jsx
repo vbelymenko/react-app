@@ -4,12 +4,13 @@ import { CourseList } from "../components/course-list";
 import { Navigation } from "../components/navigation";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { getAll, remove } from '../actions/courses';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions/courses';
 
-export class CoursesContainer extends Component {
+class CoursesContainer extends Component {
 
     componentDidMount() {
-        this.props.dispatch(getAll());
+        this.props.actions.getAll();
     }
 
     handleEditCourseClick = (id) => {
@@ -17,8 +18,7 @@ export class CoursesContainer extends Component {
     }
 
     handleRemoveCourseClick = (id) => {
-        remove(id);
-        this.props.dispatch(remove(id))
+        this.props.actions.remove(id);
     }
 
     render() {
@@ -33,10 +33,16 @@ export class CoursesContainer extends Component {
     }
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (state) => {
     return {
-        courses: store.coursesReducer.courses
+        courses: state.courses.coursesList
     };
 }
 
-export const CoursesPage = withRouter(connect(mapStateToProps)(CoursesContainer));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
+
+export const CoursesPage = withRouter(connect(mapStateToProps, mapDispatchToProps)(CoursesContainer));

@@ -12,7 +12,7 @@ export class EditCourse extends Component {
                 title: PropTypes.string,
                 description: PropTypes.string,
                 date: PropTypes.string,
-                duration: PropTypes.string
+                duration: PropTypes.number
             }).isRequired,
             courseAuthors: PropTypes.arrayOf(PropTypes.number).isRequired,
             possibleAuthors: PropTypes.arrayOf(PropTypes.number).isRequired,

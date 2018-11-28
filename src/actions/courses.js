@@ -1,5 +1,5 @@
 import * as api from '../api/CoursesApi';
-import { getCoursesSuccess, deleteCourseSuccess } from './courseActions';
+import { getCoursesSuccess, deleteCourseSuccess, getCourseByIdSuccess, updateCourseSuccess } from './courseActions';
 
 export const getAll = () => dispatch => {
     api.getAll()
@@ -16,5 +16,15 @@ export const remove = (id) => dispatch => {
 };
 
 export const getById = (id) => dispatch => {
-    dispatch(deleteCourseSuccess(id));
+    api.get(id)
+        .then(course => {
+            dispatch(getCourseByIdSuccess(course));
+        });
+};
+
+export const update = (course) => dispatch => {
+    api.update(course)
+        .then(course => {
+            dispatch(updateCourseSuccess(course));
+        });
 };

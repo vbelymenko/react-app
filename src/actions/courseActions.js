@@ -13,3 +13,17 @@ export function deleteCourseSuccess(payload) {
     payload
   };
 }
+
+export function getCourseByIdSuccess(payload) {
+  return {
+    type: types.GET_COURSE_BY_ID_SUCCESS,
+    payload
+  };
+}
+
+export function updateCourseSuccess(payload) {
+  return {
+    type: types.UPDATE_COURSE_SUCCESS,
+    payload
+  };
+}

@@ -12,3 +12,5 @@ export const remove = (id) => apify(axios.delete(`${apiUrl}/${id}`));
 export const get = (id) => apify(axios.get(`${apiUrl}/${id}`));
 
 export const getAll = () => apify(axios.get(apiUrl));
+
+export const update = (course) => apify(axios.put(apiUrl, course));
