@@ -15,12 +15,12 @@ public class CourseController {
     private CourseService courseService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Course create(Course course) {
+    public Course create(@RequestBody Course course) {
         return courseService.create(course);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public Course update(Course course) {
+    public Course update(@RequestBody Course course) {
         return courseService.update(course);
     }
 

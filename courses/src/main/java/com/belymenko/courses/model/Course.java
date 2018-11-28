@@ -6,11 +6,14 @@ public class Course {
     private Long id;
     private String title;
     private String description;
-    private int duration;
+    private Long duration;
     private List<Long> authorIds;
     private String date;
 
-    public Course(Long id, String title, String description, int duration, List<Long> authorIds, String date) {
+    public Course() {
+    }
+
+    public Course(Long id, String title, String description, Long duration, List<Long> authorIds, String date) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -43,11 +46,11 @@ public class Course {
         this.description = description;
     }
 
-    public int getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
