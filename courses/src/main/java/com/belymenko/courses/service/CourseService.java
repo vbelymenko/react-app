@@ -4,9 +4,11 @@ import com.belymenko.courses.model.Course;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +28,10 @@ public class CourseService {
     }
 
     public Course create(Course course) {
-        courses.put(course.getId(), course);
+        long id = courses.size() + 1;
+        course.setId(id);
+        course.setAuthorIds(Collections.emptyList());
+        courses.put(id, course);
         return course;
     }
 

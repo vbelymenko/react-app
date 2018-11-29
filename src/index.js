@@ -5,7 +5,7 @@ import AppRouter from './app-router/AppRouter';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reducer from './reducers/index';
+import reducer from './store/reducers/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 

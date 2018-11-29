@@ -22,7 +22,7 @@ export class EditCourse extends Component {
     }
 
     render() {
-        const { course, courseAuthors, possibleAuthors, onChange, onSave } = this.props;
+        const { course, courseAuthors, possibleAuthors, onChange, onSave, onCancle } = this.props;
         return (
             <div className="container-fluid d-flex flex-column">
                 <div className="input-group mb-3">
@@ -110,7 +110,7 @@ export class EditCourse extends Component {
                     <button onClick={onSave} className="btn btn-info btn-lg">
                         Save
                     </button>
-                    <button className="btn btn-danger btn-lg">
+                    <button onClick={onCancle} className="btn btn-danger btn-lg">
                         Cancle
                     </button>
                 </div>

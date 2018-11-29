@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Search from '@material-ui/icons/Search';
 import Add from '@material-ui/icons/Add';
 import './Navigation.css';
+import { Link } from 'react-router-dom';
 
 export class Navigation extends React.Component {
 
@@ -18,11 +19,10 @@ export class Navigation extends React.Component {
                     variant="outlined" />
                 <Button size="small" >
 
-                    <Search/>
+                    <Search />
                 </Button>
                 <Button size="small" >
-
-                    <Add/>
+                    <Link to={'courses/new'}><Add /></Link>
                 </Button>
             </form>
         )

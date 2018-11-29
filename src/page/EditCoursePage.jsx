@@ -2,31 +2,32 @@ import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../actions/courses';
+import { getById, updateField, update, clean } from '../store/actions/courses';
 import { withRouter } from "react-router-dom";
 
 export class EditCoursePageContainer extends Component {
 
     componentDidMount() {
-        this.props.actions.getById(this.props.match.params.id);
+        this.props.getById(this.props.match.params.id);
     }
+
     handleChange = (event, field) => {
-        console.log(field);
-        console.log(event.target.value);
-        // this.setState({
-        //     ...this.state,
-        //     course: {
-        //         ...this.state.course,
-        //         [field]: event.target.value
-        //     }
-        // });
+        this.props.updateField(field, event.target.value);
     }
 
     handleSave = () => {
-        this.props.actions.update(this.props.course);
+        this.props.update(this.props.course);
         this.props.history.push(`/courses`);
     }
+
+    handleCancle = () => {
+        this.props.history.push(`/courses`);
+    }
+
+    componentWillUnmount() {
+        this.props.clean();
+    }
+
     render() {
         return (
             <AppContainer>
@@ -34,6 +35,7 @@ export class EditCoursePageContainer extends Component {
                     course={this.props.course}
                     onChange={this.handleChange}
                     onSave={this.handleSave}
+                    onCancle={this.handleCancle}
                     possibleAuthors={[]}
                     courseAuthors={[]} />
             </AppContainer>
@@ -44,13 +46,7 @@ export class EditCoursePageContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         course: state.course.courseEntity
-    };
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators(actions, dispatch)
     }
 }
 
-export const EditCoursePage = withRouter(connect(mapStateToProps, mapDispatchToProps)(EditCoursePageContainer));
+export const EditCoursePage = withRouter(connect(mapStateToProps, { getById, updateField, update, clean })(EditCoursePageContainer));

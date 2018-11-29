@@ -1,43 +1,30 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
-// import { getPossibleAuthors, createCourse } from "../db/db";
+import { getDefault, updateField, create, clean } from '../store/actions/courses';
 import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 
 export class CreateCoursePageContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            course: {},
-            possibleAuthors: [],
-            courseAuthors: []
-        };
-    }
 
     componentDidMount() {
-        const course = { title: "", authorIds: [], description: '', duration: '', date: '2000-01-01' };
-        const possibleAuthors = [];
-        const courseAuthors = course.authorIds;
-        this.setState({
-            course,
-            possibleAuthors,
-            courseAuthors
-        })
+        this.props.getDefault();
+    }
+
+    componentWillUnmount() {
+        this.props.clean();
     }
 
     handleChange = (event, field) => {
-        this.setState({
-            ...this.state,
-            course: {
-                ...this.state.course,
-                [field]: event.target.value
-            }
-        });
+        this.props.updateField(field, event.target.value);
     }
 
     handleSave = () => {
-        // createCourse(this.state.course);
+        this.props.create(this.props.course);
+        this.props.history.push(`/courses`);
+    }
+
+    handleCancle = () => {
         this.props.history.push(`/courses`);
     }
 
@@ -45,14 +32,21 @@ export class CreateCoursePageContainer extends Component {
         return (
             <AppContainer>
                 <EditCourse
-                    course={this.state.course}
+                    course={this.props.course}
                     onChange={this.handleChange}
                     onSave={this.handleSave}
-                    possibleAuthors={this.state.possibleAuthors}
-                    courseAuthors={this.state.courseAuthors} />
+                    onCancle={this.handleCancle}
+                    possibleAuthors={[]}
+                    courseAuthors={[]} />
             </AppContainer>
         );
     }
 }
 
-export const CreateCoursePage = withRouter(CreateCoursePageContainer);
+const mapStateToProps = (state) => {
+    return {
+        course: state.course.courseEntity
+    }
+}
+
+export const CreateCoursePage = withRouter(connect(mapStateToProps, { getDefault, updateField, create, clean })(CreateCoursePageContainer));
