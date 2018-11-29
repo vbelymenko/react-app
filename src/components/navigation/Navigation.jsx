@@ -9,16 +9,16 @@ import { Link } from 'react-router-dom';
 export class Navigation extends React.Component {
 
     render() {
+        const { onChange, onFilter } = this.props;
         return (
             <form className="container">
                 <TextField
                     id="outlined-name"
                     label="Search"
-
+                    onChange={(e) => onChange(e.target.value)}
                     margin="normal"
                     variant="outlined" />
-                <Button size="small" >
-
+                <Button size="small" onClick={onFilter}>
                     <Search />
                 </Button>
                 <Button size="small" >

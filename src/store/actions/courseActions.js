@@ -47,3 +47,17 @@ export function getDefaultCourse() {
     type: types.GET_DEFAULT_COURSE,
   };
 }
+
+export function updateFilter(payload) {
+  return {
+    type: types.UPDATE_FILTER,
+    payload
+  };
+}
+
+export function filterCourses() {
+  return {
+    type: types.FILTER_COURSES
+  };
+}
+

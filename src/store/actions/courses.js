@@ -52,3 +52,12 @@ export const getDefault = () => dispatch => {
 export const clean = () => dispatch => {
     dispatch(courseAction.getDefaultCourse());
 };
+
+export const updateFilter = (filter) => dispatch => {
+    dispatch(courseAction.updateFilter(filter));
+};
+
+export const filterCourses = () => dispatch => {
+    dispatch(courseAction.filterCourses());
+};
+

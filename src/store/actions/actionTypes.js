@@ -2,6 +2,8 @@
 export const GET_COURSES = 'GET_COURSES';
 export const DELETE_COURSE = 'DELETE_COURSE';
 export const CREATE_COURSE = 'CREATE_COURSE';
+export const UPDATE_FILTER = 'UPDATE_FILTER';
+export const FILTER_COURSES = 'FILTER_COURSES';
 
 export const UPDATE_COURSE = 'UPDATE_COURSE';
 export const GET_COURSE_BY_ID = 'GET_COURSE_BY_ID';

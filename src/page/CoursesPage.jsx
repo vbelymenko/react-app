@@ -4,7 +4,7 @@ import { CourseList } from "../components/course-list";
 import { Navigation } from "../components/navigation";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { remove, getAll } from '../store/actions/courses';
+import { remove, getAll, updateFilter, filterCourses } from '../store/actions/courses';
 
 class CoursesContainer extends Component {
 
@@ -20,10 +20,19 @@ class CoursesContainer extends Component {
         this.props.remove(id);
     }
 
+    handleFilterChange = (filter) => {
+        this.props.updateFilter(filter);
+    }
+
+    handleFilterClick = () => {
+        this.props.filterCourses();
+    }
+
     render() {
         return (
             <AppContainer>
-                <Navigation />
+                <Navigation onChange={this.handleFilterChange}
+                    onFilter={this.handleFilterClick} />
                 <CourseList courses={this.props.courses}
                     onRemove={this.handleRemoveCourseClick}
                     onEdit={this.handleEditCourseClick} />
@@ -34,8 +43,9 @@ class CoursesContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        courses: state.courses.coursesList
+        courses: state.courses.filteredCoursesList,
+        filter: state.courses.filter
     };
 }
 
-export const CoursesPage = withRouter(connect(mapStateToProps, { getAll, remove })(CoursesContainer));
+export const CoursesPage = withRouter(connect(mapStateToProps, { getAll, remove, updateFilter, filterCourses })(CoursesContainer));
