@@ -57,7 +57,7 @@ export const updateFilter = (filter) => dispatch => {
     dispatch(courseAction.updateFilter(filter));
 };
 
-export const filterCourses = () => dispatch => {
-    dispatch(courseAction.filterCourses());
+export const cleanFilter = () => dispatch => {
+    dispatch(courseAction.cleanFilter());
 };
 

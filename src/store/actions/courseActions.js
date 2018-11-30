@@ -1,63 +1,62 @@
 import * as types from './actionTypes';
 
-export const getCourses= (payload) => {
+export const getCourses = (payload) => {
   return {
     type: types.GET_COURSES,
     payload
   };
 }
 
-export function deleteCourse(payload) {
+export const deleteCourse = (payload) => {
   return {
     type: types.DELETE_COURSE,
     payload
   };
 }
 
-export function createCourse(payload) {
+export const createCourse = (payload) => {
   return {
     type: types.CREATE_COURSE,
     payload
   };
 }
 
-export function getCourseById(payload) {
+export const getCourseById = (payload) => {
   return {
     type: types.GET_COURSE_BY_ID,
     payload
   };
 }
 
-export function updateCourse(payload) {
+export const updateCourse = (payload) => {
   return {
     type: types.UPDATE_COURSE,
     payload
   };
 }
 
-export function changeCourseField(payload) {
+export const changeCourseField = (payload) => {
   return {
     type: types.CHANGE_COURSE_FIELD,
     payload
   };
 }
 
-export function getDefaultCourse() {
+export const getDefaultCourse = () => {
   return {
     type: types.GET_DEFAULT_COURSE,
   };
 }
 
-export function updateFilter(payload) {
+export const updateFilter = (payload) => {
   return {
     type: types.UPDATE_FILTER,
     payload
   };
 }
 
-export function filterCourses() {
+export const cleanFilter = () => {
   return {
-    type: types.FILTER_COURSES
+    type: types.CLEAN_FILTER
   };
 }
-

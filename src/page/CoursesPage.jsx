@@ -4,7 +4,7 @@ import { CourseList } from "../components/course-list";
 import { Navigation } from "../components/navigation";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { remove, getAll, updateFilter, filterCourses } from '../store/actions/courses';
+import { remove, getAll, updateFilter, cleanFilter } from '../store/actions/courses';
 
 class CoursesContainer extends Component {
 
@@ -12,27 +12,32 @@ class CoursesContainer extends Component {
         this.props.getAll();
     }
 
+    componentWillUnmount(){
+        this.props.cleanFilter();
+    }
+
     handleEditCourseClick = (id) => {
         this.props.history.push(`courses/details/${id}`);
+    }
+
+    handleAddCourseClick = () => {
+        this.props.history.push('courses/new');
     }
 
     handleRemoveCourseClick = (id) => {
         this.props.remove(id);
     }
 
-    handleFilterChange = (filter) => {
+    handleFilterClick = (filter) => {
         this.props.updateFilter(filter);
-    }
-
-    handleFilterClick = () => {
-        this.props.filterCourses();
     }
 
     render() {
         return (
             <AppContainer>
                 <Navigation onChange={this.handleFilterChange}
-                    onFilter={this.handleFilterClick} />
+                    onFilter={this.handleFilterClick}
+                    onAdd={this.handleAddCourseClick} />
                 <CourseList courses={this.props.courses}
                     onRemove={this.handleRemoveCourseClick}
                     onEdit={this.handleEditCourseClick} />
@@ -43,9 +48,8 @@ class CoursesContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        courses: state.courses.filteredCoursesList,
-        filter: state.courses.filter
+        courses: state.courses.coursesList.filter(course=> course.title.includes(state.courses.filter))
     };
 }
 
-export const CoursesPage = withRouter(connect(mapStateToProps, { getAll, remove, updateFilter, filterCourses })(CoursesContainer));
+export const CoursesPage = withRouter(connect(mapStateToProps, { getAll, remove, updateFilter, cleanFilter })(CoursesContainer));

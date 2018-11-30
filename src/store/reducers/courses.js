@@ -1,7 +1,6 @@
 import * as types from '../actions/actionTypes';
 
 const initialState = {
-    filteredCoursesList: [],
     coursesList: [],
     filter: ''
 }
@@ -9,23 +8,23 @@ const initialState = {
 export default function coursesReducer(state = initialState, action) {
     switch (action.type) {
         case types.GET_COURSES: {
-            return Object.assign({}, state, { filteredCoursesList: action.payload, coursesList: action.payload });
-        }
-        case types.FILTER_COURSES: {
-            return Object.assign({}, state, { filteredCoursesList: state.coursesList.filter(course => course.title.includes(state.filter)) });
+            return Object.assign({}, state, { coursesList: action.payload });
         }
         case types.UPDATE_FILTER: {
             return Object.assign({}, state, { filter: action.payload });
         }
+        case types.CLEAN_FILTER: {
+            return Object.assign({}, state, { filter: "" });
+        }
         case types.DELETE_COURSE: {
-            return Object.assign({}, state, { filteredCoursesList: state.filteredCoursesList.filter(course => course.id !== action.payload) });
+            return Object.assign({}, state, { coursesList: state.coursesList.filter(course => course.id !== action.payload) });
         }
         case types.CREATE_COURSE: {
-            return Object.assign({}, state, { filteredCoursesList: [...state.filteredCoursesList, action.payload] });
+            return Object.assign({}, state, { coursesList: [...state.coursesList, action.payload] });
         }
         case types.UPDATE_COURSE: {
             return Object.assign({}, state, {
-                filteredCoursesList: state.filteredCoursesList.map(course => {
+                coursesList: state.coursesList.map(course => {
                     if (course.id === action.payload.id) {
                         return action.payload;
                     }

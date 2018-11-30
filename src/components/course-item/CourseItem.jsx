@@ -5,11 +5,24 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
 import './CourseItem.css';
+import PropTypes from 'prop-types';
 
 
 export class CourseItem extends Component {
+
+    static get propTypes() {
+        return {
+            course: PropTypes.shape({
+                title: PropTypes.string,
+                description: PropTypes.string,
+                date: PropTypes.string,
+                duration: PropTypes.number
+            }).isRequired,
+            onRemove: PropTypes.func.isRequired,
+            onEdit: PropTypes.func.isRequired
+        };
+    }
 
     editCourse = () => {
         const { onEdit, course } = this.props;
@@ -44,8 +57,8 @@ export class CourseItem extends Component {
                             </Typography>
                         </CardContent>
                         <div className='managment'>
-                            <Button variant="fab" className="edit-button" color="secondary" aria-label="Edit">
-                                <Link to={`courses/details/${course.id}`}><EditIcon /></Link>
+                            <Button variant="fab" className="edit-button" onClick={this.editCourse} color="secondary" aria-label="Edit">
+                                <EditIcon />
                             </Button>
                             <Button variant="fab" className="delete-button" onClick={this.removeCourse} aria-label="Delete">
                                 <DeleteIcon />

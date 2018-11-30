@@ -17,7 +17,8 @@ export class EditCourse extends Component {
             courseAuthors: PropTypes.arrayOf(PropTypes.number).isRequired,
             possibleAuthors: PropTypes.arrayOf(PropTypes.number).isRequired,
             onChange: PropTypes.func.isRequired,
-            onSave: PropTypes.func.isRequired
+            onSave: PropTypes.func.isRequired,
+            onCancle: PropTypes.func.isRequired
         };
     }
 
