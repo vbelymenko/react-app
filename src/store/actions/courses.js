@@ -1,42 +1,42 @@
 import * as api from '../api/CoursesApi';
 import * as courseAction from './courseActions';
 
-export const getAll = () => dispatch => {
+export const getAllCourses = () => dispatch => {
     api.getAll()
         .then(courses => {
             dispatch(courseAction.getCourses(courses));
         });
 };
 
-export const remove = (id) => dispatch => {
+export const removeCourse = (id) => dispatch => {
     api.remove(id)
         .then(id => {
             dispatch(courseAction.deleteCourse(id));
         });
 };
 
-export const getById = (id) => dispatch => {
+export const getCourseById = (id) => dispatch => {
     api.get(id)
         .then(course => {
             dispatch(courseAction.getCourseById(course));
         });
 };
 
-export const update = (course) => dispatch => {
+export const updateCourse = (course) => dispatch => {
     api.update(course)
         .then(course => {
             dispatch(courseAction.updateCourse(course));
         });
 };
 
-export const create = (course) => dispatch => {
+export const createCourse = (course) => dispatch => {
     api.create(course)
         .then(course => {
             dispatch(courseAction.createCourse(course));
         });
 };
 
-export const updateField = (name, value) => dispatch => {
+export const updateCourseField = (name, value) => dispatch => {
     const field = {
         name: name,
         value: value
@@ -45,19 +45,19 @@ export const updateField = (name, value) => dispatch => {
 
 };
 
-export const getDefault = () => dispatch => {
+export const getDefaultCourse = () => dispatch => {
     dispatch(courseAction.getDefaultCourse());
 };
 
-export const clean = () => dispatch => {
+export const cleanCourse = () => dispatch => {
     dispatch(courseAction.getDefaultCourse());
 };
 
-export const updateFilter = (filter) => dispatch => {
+export const updateCourseFilter = (filter) => dispatch => {
     dispatch(courseAction.updateFilter(filter));
 };
 
-export const cleanFilter = () => dispatch => {
+export const cleanCourseFilter = () => dispatch => {
     dispatch(courseAction.cleanFilter());
 };
 

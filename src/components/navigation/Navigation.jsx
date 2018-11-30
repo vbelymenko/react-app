@@ -8,26 +8,20 @@ import PropTypes from 'prop-types';
 
 export class Navigation extends React.Component {
 
+    static get propTypes() {
+        return {
+            addCourse: PropTypes.func.isRequired,
+            filterCourses: PropTypes.func.isRequired
+        };
+    }
+
     constructor(props) {
         super(props);
         this.state = { filter: '' };
     }
 
-    static get propTypes() {
-        return {
-            onAdd: PropTypes.func.isRequired,
-            onFilter: PropTypes.func.isRequired
-        };
-    }
-
-    handleFilterChange = (filter) => {
-        this.setState({
-            filter: filter
-        });
-    }
-
     render() {
-        const { onFilter, onAdd } = this.props;
+        const { addCourse, filterCourses } = this.props;
         return (
             <form className="container">
                 <TextField
@@ -37,13 +31,19 @@ export class Navigation extends React.Component {
                     margin="normal"
                     value={this.state.filter}
                     variant="outlined" />
-                <Button size="small" onClick={() => onFilter(this.state.filter)}>
+                <Button size="small" onClick={() => filterCourses(this.state.filter)}>
                     <Search />
                 </Button>
-                <Button size="small" onClick={onAdd} >
+                <Button size="small" onClick={addCourse} >
                     <Add />
                 </Button>
             </form>
         )
+    }
+
+    handleFilterChange = (filter) => {
+        this.setState({
+            filter: filter
+        });
     }
 }

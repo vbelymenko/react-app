@@ -1,31 +1,18 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
-import { getDefault, updateField, create, clean } from '../store/actions/courses';
+import { getDefaultCourse, updateCourseField, createCourse, cleanCourse } from '../store/actions/courses';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 
 export class CreateCoursePageContainer extends Component {
 
     componentDidMount() {
-        this.props.getDefault();
+        this.props.getDefaultCourse();
     }
 
     componentWillUnmount() {
-        this.props.clean();
-    }
-
-    handleChange = (event, field) => {
-        this.props.updateField(field, event.target.value);
-    }
-
-    handleSave = () => {
-        this.props.create(this.props.course);
-        this.props.history.push(`/courses`);
-    }
-
-    handleCancle = () => {
-        this.props.history.push(`/courses`);
+        this.props.cleanCourse();
     }
 
     render() {
@@ -33,13 +20,26 @@ export class CreateCoursePageContainer extends Component {
             <AppContainer>
                 <EditCourse
                     course={this.props.course}
-                    onChange={this.handleChange}
-                    onSave={this.handleSave}
-                    onCancle={this.handleCancle}
+                    changeCourse={this.handleChangeCourse}
+                    saveCourse={this.handleSaveCourse}
+                    cancelCourse={this.handleCancleCourse}
                     possibleAuthors={[]}
                     courseAuthors={[]} />
             </AppContainer>
         );
+    }
+
+    handleChangeCourse = (event, field) => {
+        this.props.updateCourseField(field, event.target.value);
+    }
+
+    handleSaveCourse = () => {
+        this.props.createCourse(this.props.course);
+        this.props.history.push(`/courses`);
+    }
+
+    handleCancleCourse = () => {
+        this.props.history.push(`/courses`);
     }
 }
 
@@ -49,4 +49,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const CreateCoursePage = withRouter(connect(mapStateToProps, { getDefault, updateField, create, clean })(CreateCoursePageContainer));
+export const CreateCoursePage = withRouter(connect(mapStateToProps, {
+    getDefaultCourse,
+    updateCourseField,
+    createCourse,
+    cleanCourse
+})(CreateCoursePageContainer));

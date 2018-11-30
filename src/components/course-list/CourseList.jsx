@@ -12,23 +12,24 @@ export class CourseList extends Component {
                 date: PropTypes.string,
                 duration: PropTypes.number
             }).isRequired).isRequired,
-            onRemove: PropTypes.func.isRequired,
-            onEdit: PropTypes.func.isRequired
+            removeCourse: PropTypes.func.isRequired,
+            editCourse: PropTypes.func.isRequired
         };
     }
 
-    renderCourses = () => {
-        const { onRemove, onEdit, courses } = this.props;
-        return courses.map(courseItem =>
-            <CourseItem
-                key={courseItem.id}
-                course={courseItem}
-                onRemove={onRemove}
-                onEdit={onEdit} />);
-    }
     render() {
         return (
             this.renderCourses()
         );
+    }
+
+    renderCourses = () => {
+        const { editCourse, removeCourse, courses } = this.props;
+        return courses.map(courseItem =>
+            <CourseItem
+                key={courseItem.id}
+                course={courseItem}
+                removeCourse={removeCourse}
+                editCourse={editCourse} />);
     }
 }

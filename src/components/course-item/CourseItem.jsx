@@ -19,22 +19,13 @@ export class CourseItem extends Component {
                 date: PropTypes.string,
                 duration: PropTypes.number
             }).isRequired,
-            onRemove: PropTypes.func.isRequired,
-            onEdit: PropTypes.func.isRequired
+            removeCourse: PropTypes.func.isRequired,
+            editCourse: PropTypes.func.isRequired
         };
     }
 
-    editCourse = () => {
-        const { onEdit, course } = this.props;
-        onEdit(course.id);
-    }
-    removeCourse = () => {
-        const { onRemove, course } = this.props;
-        onRemove(course.id);
-    }
-
     render() {
-        const { course } = this.props;
+        const { course, editCourse, removeCourse } = this.props;
         return (
             <div>
                 {course ? (
@@ -57,10 +48,10 @@ export class CourseItem extends Component {
                             </Typography>
                         </CardContent>
                         <div className='managment'>
-                            <Button variant="fab" className="edit-button" onClick={this.editCourse} color="secondary" aria-label="Edit">
+                            <Button variant="fab" className="edit-button" onClick={() => editCourse(course.id)} color="secondary" aria-label="Edit">
                                 <EditIcon />
                             </Button>
-                            <Button variant="fab" className="delete-button" onClick={this.removeCourse} aria-label="Delete">
+                            <Button variant="fab" className="delete-button" onClick={() => removeCourse(course.id)} aria-label="Delete">
                                 <DeleteIcon />
                             </Button>
                         </div>
