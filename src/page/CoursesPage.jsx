@@ -4,7 +4,7 @@ import { CourseList } from "../components/course-list";
 import { Navigation } from "../components/navigation";
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import { removeCourse, getAllCourses, updateCourseFilter, cleanCourseFilter } from '../store/actions/courses';
+import { removeCourse, getAllCourses, updateCourseFilter, cleanCourseFilter } from '../store/courses/actions/coursesMiddleware';
 
 class CoursesContainer extends Component {
 

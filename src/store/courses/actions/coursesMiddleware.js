@@ -1,5 +1,5 @@
-import * as api from '../api/CoursesApi';
-import * as courseAction from './courseActions';
+import * as api from '../../api/api';
+import * as courseAction from './coursesActions';
 
 export const getAllCourses = () => dispatch => {
     api.getAll()
@@ -12,13 +12,6 @@ export const removeCourse = (id) => dispatch => {
     api.remove(id)
         .then(id => {
             dispatch(courseAction.deleteCourse(id));
-        });
-};
-
-export const getCourseById = (id) => dispatch => {
-    api.get(id)
-        .then(course => {
-            dispatch(courseAction.getCourseById(course));
         });
 };
 
@@ -36,23 +29,6 @@ export const createCourse = (course) => dispatch => {
         });
 };
 
-export const updateCourseField = (name, value) => dispatch => {
-    const field = {
-        name: name,
-        value: value
-    }
-    dispatch(courseAction.changeCourseField(field));
-
-};
-
-export const getDefaultCourse = () => dispatch => {
-    dispatch(courseAction.getDefaultCourse());
-};
-
-export const cleanCourse = () => dispatch => {
-    dispatch(courseAction.getDefaultCourse());
-};
-
 export const updateCourseFilter = (filter) => dispatch => {
     dispatch(courseAction.updateFilter(filter));
 };
@@ -60,4 +36,3 @@ export const updateCourseFilter = (filter) => dispatch => {
 export const cleanCourseFilter = () => dispatch => {
     dispatch(courseAction.cleanFilter());
 };
-

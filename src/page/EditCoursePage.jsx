@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
 import { connect } from 'react-redux';
-import { getCourseById, updateCourseField, updateCourse, cleanCourse } from '../store/actions/courses';
+import { updateCourse } from '../store/courses/actions/coursesMiddleware';
+import { getCourseById, updateCourseField, cleanCourse } from '../store/course/actions/courseMiddleware';
 import { withRouter } from "react-router-dom";
 
 export class EditCoursePageContainer extends Component {

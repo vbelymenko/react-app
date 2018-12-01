@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CourseService {
+    private long id;
     private Map<Long, Course> courses = new HashMap<>();
 
     {
@@ -25,10 +26,11 @@ public class CourseService {
         courses.put(7L, new Course(7L, "Title3", "Description1", 1L, Arrays.asList(1L, 2L, 3L), "2000-01-01"));
         courses.put(8L, new Course(8L, "Title4", "Description1", 1L, Arrays.asList(1L, 2L, 3L), "2000-01-01"));
         courses.put(9L, new Course(9L, "Title5", "Description1", 1L, Arrays.asList(1L, 2L, 3L), "2000-01-01"));
+        id = courses.size();
     }
 
     public Course create(Course course) {
-        long id = courses.size() + 1;
+        id = ++id;
         course.setId(id);
         course.setAuthorIds(Collections.emptyList());
         courses.put(id, course);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
-import { getDefaultCourse, updateCourseField, createCourse, cleanCourse } from '../store/actions/courses';
+import { getDefaultCourse, updateCourseField, cleanCourse } from '../store/course/actions/courseMiddleware';
+import { createCourse } from '../store/courses/actions/coursesMiddleware';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 
