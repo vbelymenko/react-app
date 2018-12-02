@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
+import { getCourse } from '../store/course/selectors/courseSelector';
 import { getDefaultCourse, updateCourseField, cleanCourse } from '../store/course/actions/courseMiddleware';
 import { createCourse } from '../store/courses/actions/coursesMiddleware';
 import { withRouter } from "react-router-dom";
@@ -46,7 +47,7 @@ export class CreateCoursePageContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        course: state.course.courseEntity
+        course: getCourse(state)
     }
 }
 

@@ -3,6 +3,7 @@ import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
 import { connect } from 'react-redux';
 import { updateCourse } from '../store/courses/actions/coursesMiddleware';
+import { getCourse } from '../store/course/selectors/courseSelector';
 import { getCourseById, updateCourseField, cleanCourse } from '../store/course/actions/courseMiddleware';
 import { withRouter } from "react-router-dom";
 
@@ -46,7 +47,7 @@ export class EditCoursePageContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        course: state.course.courseEntity
+        course: getCourse(state)
     }
 }
 

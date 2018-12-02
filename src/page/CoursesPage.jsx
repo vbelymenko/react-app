@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { AppContainer } from "../components/app-container";
-import { CourseList } from "../components/course-list";
-import { Navigation } from "../components/navigation";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { AppContainer } from '../components/app-container';
+import { CourseList } from '../components/course-list';
+import { Navigation } from '../components/navigation';
+import { withRouter } from 'react-router-dom';
+import { coursesSelector } from '../store/courses/selectors/coursesSelector'
 import { connect } from 'react-redux';
 import { removeCourse, getAllCourses, updateCourseFilter, cleanCourseFilter } from '../store/courses/actions/coursesMiddleware';
 
@@ -47,7 +48,7 @@ class CoursesContainer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        courses: state.courses.coursesList.filter(course => course.title.includes(state.courses.filter))
+        courses: coursesSelector(state)
     };
 }
 
