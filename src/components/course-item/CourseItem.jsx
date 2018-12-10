@@ -6,21 +6,26 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Typography from '@material-ui/core/Typography';
 import './CourseItem.css';
+import PropTypes from 'prop-types';
 
 
 export class CourseItem extends Component {
 
-    editCourse = () => {
-        const { handleEditCourseClick, course } = this.props;
-        handleEditCourseClick(course.id);
-    }
-    removeCourse = () => {
-        const { handleRemoveCourseClick, course } = this.props;
-        handleRemoveCourseClick(course.id);
+    static get propTypes() {
+        return {
+            course: PropTypes.shape({
+                title: PropTypes.string,
+                description: PropTypes.string,
+                date: PropTypes.string,
+                duration: PropTypes.number
+            }).isRequired,
+            removeCourse: PropTypes.func.isRequired,
+            editCourse: PropTypes.func.isRequired
+        };
     }
 
     render() {
-        const { course } = this.props;
+        const { course, editCourse, removeCourse } = this.props;
         return (
             <div>
                 {course ? (
@@ -43,10 +48,10 @@ export class CourseItem extends Component {
                             </Typography>
                         </CardContent>
                         <div className='managment'>
-                                <Button variant="fab" className="edit-button" onClick={this.editCourse} color="secondary" aria-label="Edit">
-                                    <EditIcon />
-                                </Button>
-                            <Button variant="fab" className="delete-button" onClick={this.removeCourse} aria-label="Delete">
+                            <Button variant="fab" className="edit-button" onClick={() => editCourse(course.id)} color="secondary" aria-label="Edit">
+                                <EditIcon />
+                            </Button>
+                            <Button variant="fab" className="delete-button" onClick={() => removeCourse(course.id)} aria-label="Delete">
                                 <DeleteIcon />
                             </Button>
                         </div>

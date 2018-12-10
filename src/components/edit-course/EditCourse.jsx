@@ -12,17 +12,18 @@ export class EditCourse extends Component {
                 title: PropTypes.string,
                 description: PropTypes.string,
                 date: PropTypes.string,
-                duration: PropTypes.string
+                duration: PropTypes.number
             }).isRequired,
             courseAuthors: PropTypes.arrayOf(PropTypes.number).isRequired,
             possibleAuthors: PropTypes.arrayOf(PropTypes.number).isRequired,
-            onChange: PropTypes.func.isRequired,
-            onSave: PropTypes.func.isRequired
+            changeCourse: PropTypes.func.isRequired,
+            saveCourse: PropTypes.func.isRequired,
+            cancelCourse: PropTypes.func.isRequired
         };
     }
 
     render() {
-        const { course, courseAuthors, possibleAuthors, onChange, onSave } = this.props;
+        const { course, courseAuthors, possibleAuthors, changeCourse, saveCourse, cancelCourse } = this.props;
         return (
             <div className="container-fluid d-flex flex-column">
                 <div className="input-group mb-3">
@@ -32,7 +33,7 @@ export class EditCourse extends Component {
                     <input type="text"
                         className="form-control"
                         name="title"
-                        onChange={(e) => onChange(e, 'title')}
+                        onChange={(e) => changeCourse(e, 'title')}
                         placeholder="Title"
                         aria-label="Title"
                         value={course.title}
@@ -46,7 +47,7 @@ export class EditCourse extends Component {
                         className="form-control"
                         placeholder="Description"
                         aria-label="Description"
-                        onChange={(e) => onChange(e, 'description')}
+                        onChange={(e) => changeCourse(e, 'description')}
                         value={course.description}></textarea>
                 </div>
                 <div className="input-group mb-3">
@@ -58,7 +59,7 @@ export class EditCourse extends Component {
                         placeholder="Date"
                         type="date"
                         aria-label="Date"
-                        onChange={(e) => onChange(e, 'date')}
+                        onChange={(e) => changeCourse(e, 'date')}
                         value={course.date}
                         aria-describedby="basic-addon1" />
                 </div>
@@ -71,7 +72,7 @@ export class EditCourse extends Component {
                         name="duration"
                         type="number"
                         min="0"
-                        onChange={(e) => onChange(e, 'duration')}
+                        onChange={(e) => changeCourse(e, 'duration')}
                         aria-label="Duration"
                         value={course.duration}
                         aria-describedby="basic-addon1" />
@@ -107,10 +108,10 @@ export class EditCourse extends Component {
                     </ul>
                 </div>
                 <div className="d-flex justify-content-around m-3">
-                    <button onClick={onSave} className="btn btn-info btn-lg">
+                    <button onClick={saveCourse} className="btn btn-info btn-lg">
                         Save
                     </button>
-                    <button className="btn btn-danger btn-lg">
+                    <button onClick={cancelCourse} className="btn btn-danger btn-lg">
                         Cancle
                     </button>
                 </div>

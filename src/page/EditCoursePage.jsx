@@ -1,55 +1,59 @@
 import React, { Component } from 'react';
 import { AppContainer } from '../components/app-container';
 import { EditCourse } from '../components/edit-course';
-// import { getAll } from "../api/CoursesApi";
+import { connect } from 'react-redux';
+import { updateCourse } from '../store/courses/actions/coursesMiddleware';
+import { getCourse } from '../store/course/selectors/courseSelector';
+import { getCourseById, updateCourseField, cleanCourse } from '../store/course/actions/courseMiddleware';
 import { withRouter } from "react-router-dom";
-// import axios from 'axios';
 
 export class EditCoursePageContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            course: {},
-            possibleAuthors: [],
-            courseAuthors: []
-        };
-    }
 
     componentDidMount() {
-        const possibleAuthors = [];
-        const courseAuthors = [];
-        this.setState({
-            possibleAuthors,
-            courseAuthors
-        })
-    }
-    handleChange = (event, field) => {
-        this.setState({
-            ...this.state,
-            course: {
-                ...this.state.course,
-                [field]: event.target.value
-            }
-        });
+        this.props.getCourseById(this.props.match.params.id);
     }
 
-    handleSave = () => {
-        // updateCourse(this.state.course);
-        this.props.history.push(`/courses`);
+    componentWillUnmount() {
+        this.props.cleanCourse();
     }
+
     render() {
         return (
             <AppContainer>
                 <EditCourse
-                    course={this.state.course}
-                    onChange={this.handleChange}
-                    onSave={this.handleSave}
-                    possibleAuthors={this.state.possibleAuthors}
-                    courseAuthors={this.state.courseAuthors} />
+                    course={this.props.course}
+                    changeCourse={this.handleChangeCourse}
+                    saveCourse={this.handleSaveCourse}
+                    cancelCourse={this.handleCancelCourse}
+                    possibleAuthors={[]}
+                    courseAuthors={[]} />
             </AppContainer>
         );
     }
+
+    handleChangeCourse = (event, field) => {
+        this.props.updateCourseField(field, event.target.value);
+    }
+
+    handleSaveCourse = () => {
+        this.props.updateCourse(this.props.course);
+        this.props.history.push(`/courses`);
+    }
+
+    handleCancelCourse = () => {
+        this.props.history.push(`/courses`);
+    }
 }
 
-export const EditCoursePage = withRouter(EditCoursePageContainer);
+const mapStateToProps = (state) => {
+    return {
+        course: getCourse(state)
+    }
+}
+
+export const EditCoursePage = withRouter(connect(mapStateToProps, {
+    getCourseById,
+    updateCourseField,
+    updateCourse,
+    cleanCourse
+})(EditCoursePageContainer));

@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import AppRouter from './app-router/AppRouter';
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducer from './store';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
-
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
-    <Router>
-        <AppRouter/>
-    </Router>, document.getElementById('root'));
+    <Provider store={store}>
+        <Router>
+            <AppRouter />
+        </Router>
+    </Provider>, document.getElementById('root'));
