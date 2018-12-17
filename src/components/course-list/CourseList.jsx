@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CourseItem } from '../course-item';
 import PropTypes from 'prop-types';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export class CourseList extends Component {
 
@@ -19,7 +20,17 @@ export class CourseList extends Component {
 
     render() {
         return (
-            this.renderCourses()
+            <div>
+                <InfiniteScroll
+                    dataLength={this.state.items.length}
+                    next={this.fetchMoreData}
+                    hasMore={true}
+                    loader={<h4>Loading...</h4>}>
+
+                    {this.renderCourses()}
+                    
+                </InfiniteScroll>
+            </div>
         );
     }
 

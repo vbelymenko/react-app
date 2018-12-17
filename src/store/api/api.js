@@ -13,6 +13,13 @@ export const get = (id) => apify(axios.get(`${apiUrl}/${id}`));
 
 export const getAll = () => apify(axios.get(apiUrl));
 
+export const fetchMoreCourses = (page, offset) => {
+    var params = new URLSearchParams();
+    params.append('page', page);
+    params.append('offset', offset);
+    return apify(axios.post(`${apiUrl}/fetch`, params));
+}
+
 export const update = (course) => apify(axios.put(apiUrl, course));
 
 export const create = (course) => apify(axios.post(apiUrl, course));

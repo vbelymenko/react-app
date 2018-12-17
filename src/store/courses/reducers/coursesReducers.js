@@ -2,7 +2,8 @@ import * as types from '../actions/coursesActionTypes';
 
 const initialState = {
     coursesList: [],
-    filter: ''
+    filter: '',
+    hasMore: true
 }
 
 export const courses = (state = initialState, action) => {
@@ -22,6 +23,9 @@ export const courses = (state = initialState, action) => {
         case types.CREATE_COURSE: {
             return Object.assign({}, state, { coursesList: [...state.coursesList, action.payload] });
         }
+        // case types.FETCH_MORE_COURSES: {
+            
+        // }
         case types.UPDATE_COURSE: {
             return Object.assign({}, state, {
                 coursesList: state.coursesList.map(course => {

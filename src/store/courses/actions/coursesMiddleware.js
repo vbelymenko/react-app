@@ -36,3 +36,10 @@ export const updateCourseFilter = (filter) => dispatch => {
 export const cleanCourseFilter = () => dispatch => {
     dispatch(courseAction.cleanFilter());
 };
+
+export const fetchMoreCourses = (page, offset) => dispatch => {
+    api.fetchMoreCourses(page, offset)
+        .then(courses => {
+            dispatch(courseAction.fetchMoreCourses(courses));
+        });
+};

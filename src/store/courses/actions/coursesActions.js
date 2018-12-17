@@ -40,3 +40,10 @@ export const cleanFilter = () => {
         type: types.CLEAN_FILTER
     };
 }
+
+export const fetchMoreCourses = (payload) => {
+    return {
+        type: types.FETCH_MORE_COURSES,
+        payload
+    };
+}
