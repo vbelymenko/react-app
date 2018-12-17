@@ -5,7 +5,7 @@ const initialState = {
     filter: ''
 }
 
-export default function coursesReducer(state = initialState, action) {
+export const courses = (state = initialState, action) => {
     switch (action.type) {
         case types.GET_COURSES: {
             return Object.assign({}, state, { coursesList: action.payload });
