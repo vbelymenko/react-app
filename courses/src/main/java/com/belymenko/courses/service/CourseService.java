@@ -17,8 +17,8 @@ public class CourseService {
     private Map<Long, Course> courses = new HashMap<>();
 
     {
-        for (long i = 1; i < 100; i++) {
-            courses.put(i, new Course(i, "Title1", "Description1", 1L, Arrays.asList(1L, 2L, 3L), "2000-01-01"));
+        for (long i = 0; i < 100; i++) {
+            courses.put(i, new Course(i, "Title" + i, "Description1", i, Arrays.asList(1L, 2L, 3L), "2000-01-01"));
         }
         id = courses.size();
     }
@@ -50,6 +50,7 @@ public class CourseService {
     }
 
     public List<Course> getChunk(Integer page, Integer offset) {
-        return courses.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList()).subList(page, page + offset);
+        return courses.entrySet().stream().map(Map.Entry::getValue)
+                .collect(Collectors.toList()).subList(page, page + offset);
     }
 }

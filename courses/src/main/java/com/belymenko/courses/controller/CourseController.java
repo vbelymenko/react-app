@@ -40,8 +40,9 @@ public class CourseController {
         return courseService.getAll();
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/pull")
+    @RequestMapping(method = RequestMethod.POST, path = "/fetch")
     public List<Course> getChunk(@RequestParam Integer page, @RequestParam Integer offset) {
+        System.out.println("call");
         return courseService.getChunk(page, offset);
     }
 }

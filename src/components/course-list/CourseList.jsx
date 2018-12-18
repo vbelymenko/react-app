@@ -14,28 +14,28 @@ export class CourseList extends Component {
                 duration: PropTypes.number
             }).isRequired).isRequired,
             removeCourse: PropTypes.func.isRequired,
-            editCourse: PropTypes.func.isRequired
+            editCourse: PropTypes.func.isRequiredY
         };
     }
 
     render() {
+        const { fetchMoreCourses, courses, editCourse, removeCourse, hasMore } = this.props;
         return (
             <div>
                 <InfiniteScroll
-                    dataLength={this.state.items.length}
-                    next={this.fetchMoreData}
-                    hasMore={true}
+                    dataLength={courses.length}
+                    next={fetchMoreCourses}
+                    hasMore={hasMore}
                     loader={<h4>Loading...</h4>}>
 
-                    {this.renderCourses()}
-                    
+                    {this.renderCourses(editCourse, removeCourse, courses)}
+
                 </InfiniteScroll>
             </div>
         );
     }
 
-    renderCourses = () => {
-        const { editCourse, removeCourse, courses } = this.props;
+    renderCourses = (editCourse, removeCourse, courses) => {
         return courses.map(courseItem =>
             <CourseItem
                 key={courseItem.id}

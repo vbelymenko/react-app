@@ -23,9 +23,12 @@ export const courses = (state = initialState, action) => {
         case types.CREATE_COURSE: {
             return Object.assign({}, state, { coursesList: [...state.coursesList, action.payload] });
         }
-        // case types.FETCH_MORE_COURSES: {
-            
-        // }
+        case types.FETCH_MORE_COURSES: {
+            if (state.coursesList.length > 50) {
+                return Object.assign({}, state, { hasMore: false });
+            }
+            return Object.assign({}, state, { coursesList: state.coursesList.concat(action.payload) });
+        }
         case types.UPDATE_COURSE: {
             return Object.assign({}, state, {
                 coursesList: state.coursesList.map(course => {
